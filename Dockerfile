@@ -1,8 +1,11 @@
-FROM tensorflow/tensorflow:latest
+# FROM tensorflow/tensorflow:latest
+FROM    ubuntu:latest
 
-RUN apt update
-RUN apt upgrade -y
+RUN     apt-get update -y
+RUN     apt-get upgrade -y
 
-RUN pip install matplotlib
+RUN     apt-get install -y python3 python3.12-venv
 
-CMD [ "/bin/bash" ]
+RUN     python3 -m venv env
+
+CMD     [ "/bin/bash" ]

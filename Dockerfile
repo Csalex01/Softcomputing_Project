@@ -8,4 +8,6 @@ RUN     apt-get install -y python3 python3.12-venv
 
 RUN     python3 -m venv env
 
+RUN     /env/bin/pip install opencv-python ultralytics
+
 CMD     [ "/bin/bash" ]

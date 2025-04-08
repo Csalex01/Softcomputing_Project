@@ -1,0 +1,33 @@
+# Use an official lightweight Ubuntu base image
+FROM ubuntu:20.04
+
+# Set non-interactive mode to avoid prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set the working directory
+WORKDIR /mmdetection
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 python3-pip python3-venv git wget nano \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a virtual environment and activate it
+RUN python3 -m venv /opt/mmdet_env
+ENV PATH="/opt/mmdet_env/bin:$PATH"
+
+# Upgrade pip
+RUN pip install --upgrade pip
+
+# Install OpenMMLab dependencies
+RUN pip install -U openmim torch
+RUN mim install mmengine mmcv
+
+# Clone MMDetection repository
+RUN git clone https://github.com/open-mmlab/mmdetection.git /mmdetection
+
+# Install MMDetection
+# RUN pip install -e .
+
+# Set the entry point to bash for easy interaction
+CMD ["bash"]    

@@ -37,4 +37,7 @@ RUN conda clean --all \
     && cd /mmdetection \
     && pip install --no-cache-dir -e .
 
+RUN mim install mmdet
+RUN mim download mmdet --config rtmdet_tiny_8xb32-300e_coco --dest /mmdetection
+
 WORKDIR /mmdetection
